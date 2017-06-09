@@ -1,6 +1,6 @@
 
 // FingerName.java
-// Andrew Davison, ad@fivedots.coe.psu.ac.th, November 2012
+// Aman Adhav
 
 /* Names of the fingers, ordered counter-clockwise for the left hand
 
