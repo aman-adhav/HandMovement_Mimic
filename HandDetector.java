@@ -1,11 +1,8 @@
 
 // HandDetector.java
-// Andrew Davison, ad@fivedots.coe.psu.ac.th, July 2013
+// Aman Adhav
 
-/* Analyze an image containing an HSV coloured gloved hand.
-   Find the largest contour, its convex hull, amnd convexity
-   defects. Extract finger tips from the defects and, by assuming
-   that it is a left hand, label the fingers.
+/* Analyze an image containing a hand.
 */
 
 import java.io.*;
@@ -134,12 +131,7 @@ public class HandDetector
 
 
   public void update(IplImage im)
- /* Convert the image to HSV format. Calculate a threshold
-    image using the HSV ranges for the colour being detected. Find
-    the largest contour in the threshold image. Find the finger tips
-    using a convex hull and defects detection, and then label the fingers
-    (assuming that the thumb is on the left of the hand).
- */
+
   {
 
     // scale and convert image format to HSV
@@ -463,16 +455,16 @@ public class HandDetector
   /* calculate angle of tip relative to the COG, remembering to add the
      hand contour angle so that the hand is orientated straight up */
   {
-    int yOffset = cogPt.y - tipPt.y;    // make y positive up screen
+    int yOffset = cogPt.y - tipPt.y;    
     int xOffset = tipPt.x - cogPt.x;
-    // Point offsetPt = new Point(xOffset, yOffset);
+  
 
     double theta = Math.atan2(yOffset, xOffset);
     int angleTip = (int) Math.round( Math.toDegrees(theta));
     int offsetAngleTip = angleTip + (90 - contourAxisAngle);
-             // this addition ensures that the hand is orientated straight up
+             
     return offsetAngleTip;
-  }  // end of angleToCOG()
+  } 
 
 
 
@@ -485,42 +477,42 @@ public class HandDetector
 
 
   private void labelUnknowns(ArrayList<FingerName> nms)
-  // attempt to label all the unknown fingers in the list
+
   { 
     // find first named finger
     int i = 0;
     while ((i < nms.size()) && (nms.get(i) == FingerName.UNKNOWN))
       i++;
-    if (i == nms.size())   // no named fingers found, so give up
+    if (i == nms.size())  
       return;
 
     FingerName name = nms.get(i);
-    labelPrev(nms, i, name);    // fill-in backwards
-    labelFwd(nms, i, name);    // fill-in forwards
-  }  // end of labelUnknowns()
+    labelPrev(nms, i, name);   
+    labelFwd(nms, i, name);    
+  }  
 
 
 
   private void labelPrev(ArrayList<FingerName> nms, int i, FingerName name)
-  // move backwards through fingers list labelling unknown fingers
+  
   { 
     i--;
     while ((i >= 0) && (name != FingerName.UNKNOWN)){
-      if (nms.get(i) == FingerName.UNKNOWN) {   // unknown finger
+      if (nms.get(i) == FingerName.UNKNOWN) {   
         name = name.getPrev();
         if (!usedName(nms, name))
           nms.set(i, name);
       }
-      else   // finger is named already
+      else   
         name = nms.get(i);
       i--;
     }
-  }  // end of labelPrev()
+  }  
 
 
 
   private void labelFwd(ArrayList<FingerName> nms, int i, FingerName name)
-  // move forward through fingers list labelling unknown fingers
+  
   { 
     i++;
     while ((i < nms.size()) && (name != FingerName.UNKNOWN)) {
@@ -529,61 +521,61 @@ public class HandDetector
         if (!usedName(nms, name))
           nms.set(i, name);
       }
-      else    // finger is named already
+      else    
         name = nms.get(i);
       i++;
     }
-  }  // end of labelFwd()
+  }  
 
 
 
   private boolean usedName(ArrayList<FingerName> nms, FingerName name)
-  // does the fingers list contain name already?
+
   { 
     for(FingerName fn : nms)
       if (fn == name)
         return true;
     return false;
-  }  // end of usedName()
+  }  
 
 
-  // --------------------------- drawing ----------------------------------
+
 
   public void draw(Graphics2D g2d)
-  // draw information about the finger tips and the hand COG
+  
   {
     if (fingerTips.size() == 0)
       return;
 
     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
-                         RenderingHints.VALUE_ANTIALIAS_ON);  // line smoothing
+                         RenderingHints.VALUE_ANTIALIAS_ON); 
     g2d.setPaint(Color.YELLOW);
-    g2d.setStroke(new BasicStroke(4));  // thick yellow pen
+    g2d.setStroke(new BasicStroke(4));  
 
-    // label the finger tips in red or green, and draw COG lines to named tips
+    
     g2d.setFont(msgFont);
     for (int i=0; i < fingerTips.size(); i++) {
       Point pt = fingerTips.get(i);
       if (namedFingers.get(i) == FingerName.UNKNOWN) {
-        g2d.setPaint(Color.RED);   // unnamed finger tip is red
+        g2d.setPaint(Color.RED);   
         g2d.drawOval(pt.x-8, pt.y-8, 16, 16);
-        g2d.drawString("" + i, pt.x, pt.y-10);   // label it with a digit
+        g2d.drawString("" + i, pt.x, pt.y-10);   
       }
-      else {   // draw yellow line to the named finger tip from COG
+      else {   
         g2d.setPaint(Color.YELLOW);
         g2d.drawLine(cogPt.x, cogPt.y, pt.x, pt.y);
 
-        g2d.setPaint(Color.GREEN);   // named finger tip is green
+        g2d.setPaint(Color.GREEN);   
         g2d.drawOval(pt.x-8, pt.y-8, 16, 16);
         g2d.drawString(namedFingers.get(i).toString().toLowerCase(), pt.x, pt.y-10);
       }
     }
 
-    // draw COG
+    
     g2d.setPaint(Color.GREEN);
     g2d.fillOval(cogPt.x-8, cogPt.y-8, 16, 16);
-  }  // end of draw()
+  }  
 
 
 
-}  // end of HandDetector class
+}  
