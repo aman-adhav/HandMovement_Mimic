@@ -1,9 +1,8 @@
 
 // Handy.java
-// Andrew Davison, July 2013, ad@fivedots.psu.ac.th
+// Aman Adhav
 
-/* Detect the user's gloved hand and fingers, drawing information
-   on top of a webcam image.
+/* Detect users hand using the webcam 
 
    Usage:
    > run Handy
