@@ -1,10 +1,6 @@
 
 // HandPanel.java
-// Andrew Davison, July 2013, ad@fivedots.psu.ac.th
-
-/* This panel repeatedly snaps a picture and draw it onto
-   the panel. OpenCV is used, via the HandDetector class, to detect
-   the user's gloved hand and label the fingers.
+// Aman Adhav
 
 */
 
