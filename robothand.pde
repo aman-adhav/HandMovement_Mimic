@@ -49,7 +49,7 @@ void draw(){
     for (int i = 0; i < onoffdata.length; i++){
       line = line + onoffdata[i];
     }
-    //port.write(onoffdata);
+    //port.write(line);
     text(line,10,100); 
   }else{
     text("POP A HOYA",10,100);
