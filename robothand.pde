@@ -14,6 +14,7 @@ Serial port1;
 
 void setup () { 
   //size(600, 600);  // set up the window to whatever size you want
+  /*
   println(Serial.list());  // List all the available serial ports
   String portName = "COM5"; // Change these port names as need according to the port list
   String portName1 = "COM7"; // Change these port names as need according to the port list
@@ -23,6 +24,7 @@ void setup () {
   port1 = new Serial(this, portName1, 9600);
   port.clear();
   port1.clear();
+  */
   
 }
 public boolean isServerAlive()
@@ -42,10 +44,13 @@ void draw(){
 
   // If the website is active
   if (isServerAlive()) {
-    String onoffdata = loadStrings("http://wossrobotics.ca/Hand_data.txt"); //load the character (instruction from the website)
-   
-    port.write(onoffdata);
-    text(onoffdata,10,100); 
+    String onoffdata[] = loadStrings("http://wossrobotics.ca/Hand_data.txt"); //load the character (instruction from the website)
+    String line = "";
+    for (int i = 0; i < onoffdata.length; i++){
+      line = line + onoffdata[i];
+    }
+    //port.write(onoffdata);
+    text(line,10,100); 
   }else{
     text("POP A HOYA",10,100);
   }
