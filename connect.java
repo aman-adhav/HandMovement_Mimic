@@ -5,7 +5,7 @@ import java.net.*;
 
 public class URLConnectionReader {
     public static void main(String[] args) throws Exception {
-
+        //URL Connection to website
     	URL url = new URL("http://wossrobotics.ca/hand.php?state=lol");
     	  HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
     	  httpCon.setDoOutput(true);
