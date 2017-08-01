@@ -16,3 +16,4 @@ Arduino :
 Esentially the code analyzes an image containing an HSV hand. Find the largest contour, its convex hull, and convexity defects. Extract finger tips from the defects and, by assuming that it is a left hand, label the fingers.
 
 ![Screenshot](cake.png)
+![Screenshot](hand.png)
