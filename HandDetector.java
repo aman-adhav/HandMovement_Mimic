@@ -100,7 +100,7 @@ public class HandDetector
   private void setHSVRanges(String fnm)
   /* read in three lines to set the lower/upper HSV ranges for the user's glove. 
      These were previously stored using the HSV Selector application 
-     (see NUI chapter 5 on blobs drumming). */
+      */
   {
     try {
       BufferedReader in = new BufferedReader(new FileReader(fnm));
