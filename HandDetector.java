@@ -263,14 +263,7 @@ public class HandDetector
 
 
   private int calculateTilt(double m11, double m20, double m02)
-  /* Return integer degree angle of contour's major axis relative to the horizontal, 
-     assuming that the positive y-axis goes down the screen. 
 
-     This code is based on maths explained in "Simple Image Analysis By Moments", by
-     Johannes Kilian, March 15, 2001 (see Table 1 on p.7). 
-     The paper is available at:
-          http://public.cranfield.ac.uk/c5354/teaching/dip/opencv/SimpleImageAnalysisbyMoments.pdf
-  */
   {
     double diff = m20 - m02;
     if (diff == 0) {
