@@ -1,4 +1,4 @@
-# HandMovement_Mimic
+# HandMovement_Mimic Continuation of MakeUofT
 
 This project is currently under development and currently requires major changes to the image processing code. Majority of the code is written in Java and C++. 
 
